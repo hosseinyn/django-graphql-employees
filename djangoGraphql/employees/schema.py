@@ -53,9 +53,26 @@ class EditEmployee(graphene.Mutation):
 
         return EditEmployee(employee=employee)
     
+class DeleteEmployee(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID(required=True)
+
+    ok = graphene.Boolean()
+
+    def mutate(root , info , id):
+        try :
+            employee = Employee.objects.get(pk=id)
+
+            employee.delete()
+
+            return DeleteEmployee(ok=True)
+        except Employee.DoesNotExist : 
+            return DeleteEmployee(ok=False)
+    
 
 class Mutation(graphene.ObjectType):
     create_employee = CreateEmployee.Field()
     edit_employee = EditEmployee.Field()
+    delete_employee = DeleteEmployee.Field()
 
 schema = graphene.Schema(query=Query , mutation=Mutation)
