@@ -23,13 +23,39 @@ class CreateEmployee(graphene.Mutation):
 
     employee = graphene.Field(EmployeeType)
 
-    def mutate(root, info ,  firstname , lastname , age , hire_date):
+    def mutate(root, info , firstname , lastname , age , hire_date):
         employee = Employee(firstname=firstname , lastname=lastname , age=age , hire_date=hire_date)
         employee.save()
         return CreateEmployee(employee=employee)
     
+class EditEmployee(graphene.Mutation):
+    class Arguments:
+        id = graphene.ID(required=True)
+        firstname = graphene.String()
+        lastname = graphene.String()
+        age = graphene.Int()
+        hire_date = graphene.Date()
+
+    employee = graphene.Field(EmployeeType)
+
+    def mutate(root , info , firstname , lastname , age , hire_date , id):
+        employee = Employee.objects.get(pk=id)
+        if firstname:
+            employee.firstname = firstname
+        if lastname:
+            employee.lastname = lastname
+        if age:
+            employee.age = age
+        if hire_date:
+            employee.hire_date = hire_date
+
+        employee.save()
+
+        return EditEmployee(employee=employee)
+    
 
 class Mutation(graphene.ObjectType):
     create_employee = CreateEmployee.Field()
+    edit_employee = EditEmployee.Field()
 
 schema = graphene.Schema(query=Query , mutation=Mutation)
