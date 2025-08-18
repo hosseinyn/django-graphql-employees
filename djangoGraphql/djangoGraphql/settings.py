@@ -39,8 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'graphene_django',
     'employees',
-    'frontend',
-    'bootstrap5',
 ]
 
 GRAPHENE = {
