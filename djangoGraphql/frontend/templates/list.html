@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} Employees List {% endblock %}
+
+{% block content %}
+
+<h1 class="mt-5 text-center">Employees List</h1>
+
+<div class="d-flex flex-column gap-5 mt-5 justify-content-center align-items-center">
+{% if employees %}
+    {% for employee in employees %}
+        <div class="employees-list d-flex flex-row gap-3 align-items-center justify-content-center">
+            <h5>{{employee.firstname}} {{employee.lastname}}</h5>
+            <h5>{{employee.age}} years old</h5>
+            <h5>Hired at {{employee.hire_date}}</h5>
+            <form method="post" data-id="{{employee.id}}" onsubmit="handleDeleteForm(event)">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    {% endfor %}
+{% else %}
+    <h4>No employee found.</h4>
+{% endif %}
+</div>
+
+{% endblock %}

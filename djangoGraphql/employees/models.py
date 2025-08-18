@@ -3,8 +3,8 @@ from django.core.exceptions import ValidationError
 
 # Create your models here.
 class Employee(models.Model):
-    firstname = models.CharField(null=False)
-    lastname = models.CharField(null=False)
+    firstname = models.CharField(null=False , max_length=50)
+    lastname = models.CharField(null=False , max_length=50)
     age = models.PositiveIntegerField(null=False)
     hire_date = models.DateField(null=False)
 
