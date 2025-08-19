@@ -93,6 +93,11 @@ const handleDeleteForm = async (e) => {
                   <button type="submit" className="btn btn-danger">
                     Delete
                   </button>
+                  <Link to={`/edit-employee/${value.id}`}>
+                    <button type="button" className="btn btn-warning ms-1">
+                        Edit
+                    </button>
+                  </Link>
                 </form>
               </div>
             );

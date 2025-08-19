@@ -24,8 +24,6 @@ const Add = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        console.log(formData)
-
         const schema_query = `
             mutation {
                 createEmployee(firstname:"${formData.firstname}" , lastname:"${formData.lastname}" , age:${formData.age} , hireDate:"${formData.hireDate}"){
