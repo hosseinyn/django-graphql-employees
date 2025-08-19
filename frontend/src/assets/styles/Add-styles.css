@@ -1,0 +1,21 @@
+.add-employee-form {
+    min-height: 400px;
+    width: 360px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    border-radius: 10px;
+}
+
+.add-employee-form input {
+    height: 37px;
+    width: 300px;
+    border-radius: 6px;
+    border: 1px solid #000;
+    outline: none;
+    padding-left: 10px;
+}
+
+.add-employee-form button{
+    width: 130px;
+}
