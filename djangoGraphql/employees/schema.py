@@ -9,10 +9,14 @@ class EmployeeType(DjangoObjectType):
         fields = ("__all__")
 
 class Query(graphene.ObjectType):
-    all_employees = graphene.List(EmployeeType)
+    all_employees = graphene.List(EmployeeType , employee_id=graphene.ID())
 
-    def resolve_all_employees(root, info):
-        return Employee.objects.all()
+    def resolve_all_employees(root, info , employee_id = None):
+        employees = Employee.objects.all()
+        if employee_id :
+            return employees.filter(pk=employee_id)
+        else:
+            return employees
     
 class CreateEmployee(graphene.Mutation):
     class Arguments:
